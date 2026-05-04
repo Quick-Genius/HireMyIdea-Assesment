@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer } from "../utils/animations";
+import { staggerContainer } from "../utils/animations";
 
 const steps = [
   {

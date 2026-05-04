@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
-import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import HowItWorks from './components/HowItWorks';
 import Testimonials from './components/Testimonials';
@@ -12,7 +11,6 @@ import ComingSoon from './components/ComingSoon';
 function LandingPage() {
   return (
     <>
-      <Navbar />
       <Hero />
       <HowItWorks />
       <Testimonials />
