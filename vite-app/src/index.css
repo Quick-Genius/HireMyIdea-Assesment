@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --font-pall: "pallFont", "pallFont Fallback", sans-serif;
+  --font-nueu: "nueuFont", "nueuFont Fallback", sans-serif;
+  --color-primary: #1F3824;
+  --color-secondary: #AEB93E;
+  --color-brand-green: #386641;
+  --color-primary-foreground: #ffffff;
+}
+
+/* Fix for carousels without original JS */
+.mask-l-from-50-pct { mask-image: linear-gradient(to right, transparent, black 50%); }
+.mask-r-from-50-pct { mask-image: linear-gradient(to left, transparent, black 50%); }
+
+/* Ensure containers are visible and correctly spaced */
+.bg-neutral-100 { background-color: #f5f5f5 !important; }
+
+/* Section Spacing Fixes */
+#features, #how-it-works, .how-it-works-wrapper {
+  margin-top: 6rem !important;
+  margin-bottom: 6rem !important;
+}
+
+/* Carousel Animations */
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  animation: scroll-x 30s linear infinite;
+}
+
+/* Floating Animation for Hero Card */
+@keyframes float {
+  0% { transform: translateY(220px); }
+  50% { transform: translateY(210px); }
+  100% { transform: translateY(220px); }
+}
+
+.hero-details-card {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Brand Font Application */
+h1, h2, h3, .font-pall {
+  font-family: var(--font-pall) !important;
+}
+
+/* Layout fixes for captured static content */
+img { max-width: 100%; height: auto; }
