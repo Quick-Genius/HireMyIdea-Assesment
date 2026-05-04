@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Hero from './components/Hero';
 import HowItWorks from './components/HowItWorks';
+import HealthBenefits from './components/HealthBenefits';
 import Testimonials from './components/Testimonials';
 import Features from './components/Features';
 import Pricing from './components/Pricing';
@@ -13,6 +14,7 @@ function LandingPage() {
     <>
       <Hero />
       <HowItWorks />
+      <HealthBenefits />
       <Testimonials />
       <Features />
       <Pricing />
