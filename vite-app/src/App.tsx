@@ -6,6 +6,8 @@ import HealthBenefits from './components/HealthBenefits';
 import Testimonials from './components/Testimonials';
 import Features from './components/Features';
 import Pricing from './components/Pricing';
+import ProtectYourFamily from './components/ProtectYourFamily';
+import Independence from './components/Independence';
 import Footer from './components/Footer';
 import ComingSoon from './components/ComingSoon';
 
@@ -18,6 +20,8 @@ function LandingPage() {
       <Testimonials />
       <Features />
       <Pricing />
+      <ProtectYourFamily />
+      <Independence />
       <Footer />
     </>
   );

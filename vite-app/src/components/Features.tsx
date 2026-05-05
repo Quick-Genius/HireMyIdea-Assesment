@@ -1,114 +1,168 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-
-const featureCards = [
-  {
-    title: "Detailed Product Breakdown",
-    description: "Olive goes beyond basic labels. We analyze processing levels, additives, and hidden toxins to give you a complete picture of what's in your food.",
-    color: "bg-[#EFF6F0]",
-    textColor: "text-[#386641]",
-    icon: (
-      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-      </svg>
-    )
-  },
-  {
-    title: "Seed Oil Free Dining Map",
-    description: "Find restaurants that align with your health goals. Our integrated map highlights dining spots that prioritize clean oils and ingredients.",
-    color: "bg-[#386641]",
-    textColor: "text-white",
-    icon: (
-      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    )
-  },
-  {
-    title: "Certified Lab-Testing Data",
-    description: "We verify our data with certified lab results, ensuring that the information you receive is accurate, scientific, and trustworthy.",
-    color: "bg-[#AEB93E]",
-    textColor: "text-white",
-    icon: (
-      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a2 2 0 00-1.96 1.414l-.724 2.17a2 2 0 00.547 1.022l1.414 1.414a2 2 0 001.022.547l2.387.477a2 2 0 001.96-1.414l.724-2.17a2 2 0 00-.547-1.022l-1.414-1.414z" />
-      </svg>
-    )
-  }
-];
-
-const FeatureCard = ({ card, index, progress, range }: { card: any, index: number, progress: any, range: number[] }) => {
-  const scale = useTransform(progress, range, [1, 1 - (featureCards.length - index) * 0.05]);
-  
-  return (
-    <div className="sticky top-[15vh] flex items-center justify-center mb-[10vh]">
-      <motion.div 
-        style={{ scale, top: `calc(15vh + ${index * 25}px)` }}
-        className={`relative w-full max-w-4xl h-[500px] ${card.color} rounded-[3rem] p-12 shadow-2xl flex flex-col justify-between overflow-hidden border border-black/5`}
-      >
-        <div className="flex justify-between items-start">
-           <div className={`${card.textColor} opacity-80`}>
-              {card.icon}
-           </div>
-           <div className={`text-6xl font-pall ${card.textColor} opacity-20`}>
-              0{index + 1}
-           </div>
-        </div>
-        
-        <div className="flex flex-col gap-6">
-           <h3 className={`text-4xl md:text-5xl font-pall font-bold ${card.textColor}`}>
-              {card.title}
-           </h3>
-           <p className={`text-xl md:text-2xl ${card.textColor} opacity-90 max-w-2xl leading-relaxed`}>
-              {card.description}
-           </p>
-        </div>
-
-        {/* Decorative background element */}
-        <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
-      </motion.div>
-    </div>
-  );
-};
+import React from "react";
+import { motion } from "framer-motion";
 
 const Features: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
   return (
-    <section id="features" ref={containerRef} className="relative bg-white py-24">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex flex-col items-center mb-32">
-          <h2 className="font-pall text-primary text-4xl md:text-7xl font-bold text-center mb-8">
-            Why Choose Olive?
-          </h2>
-          <p className="text-xl text-neutral-600 text-center max-w-2xl">
-            We've built the most comprehensive health companion for your grocery shopping and dining experiences.
-          </p>
-        </div>
+    <section className="py-12 md:py-24 bg-[#F5FAF6]">
+      <div className="max-w-5xl mx-auto px-4">
+        <div className="bg-[#386641] text-white rounded-3xl p-6 md:p-12 shadow-2xl">
+          
+          {/* Header Section */}
+          <div className="text-center flex flex-col items-center gap-4 mb-12">
+            <div className="flex relative text-primary items-center justify-center">
+              <h2 className="font-pall max-w-xl font-[500] text-2xl md:text-[3.2rem] text-white leading-tight">
+                Olive Food Scanner App vs. The Rest
+              </h2>
+            </div>
+            
+            <a 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="md:px-8 md:py-4 md:text-lg inline-flex items-center cursor-pointer font-sans justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-all bg-white text-[#386641] shadow-xl hover:bg-neutral-50 px-6 py-3 text-sm mt-6 group" 
+              href="https://apps.apple.com/us/app/olive-holistic-food-scanner/id6739765789"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none" className="tabler-icon tabler-icon-brand-apple-filled transition-transform group-hover:scale-110">
+                <path d="M15.079 5.999l.239 .012c1.43 .097 3.434 1.013 4.508 2.586a1 1 0 0 1 -.344 1.44c-.05 .028 -.372 .158 -.497 .217a4.15 4.15 0 0 0 -.722 .431c-.614 .461 -.948 1.009 -.942 1.694c.01 .885 .339 1.454 .907 1.846c.208 .143 .436 .253 .666 .33c.126 .043 .426 .116 .444 .122a1 1 0 0 1 .662 .942c0 2.621 -3.04 6.381 -5.286 6.381c-.79 0 -1.272 -.091 -1.983 -.315l-.098 -.031c-.463 -.146 -.702 -.192 -1.133 -.192c-.52 0 -.863 .06 -1.518 .237l-.197 .053c-.575 .153 -.964 .226 -1.5 .248c-2.749 0 -5.285 -5.093 -5.285 -9.072c0 -3.87 1.786 -6.92 5.286 -6.92c.297 0 .598 .045 .909 .128c.403 .107 .774 .26 1.296 .508c.787 .374 .948 .44 1.009 .44h.016c.03 -.003 .128 -.047 1.056 -.457c1.061 -.467 1.864 -.685 2.746 -.616l-.24 -.012z"></path>
+                <path d="M14 1a1 1 0 0 1 1 1a3 3 0 0 1 -3 3a1 1 0 0 1 -1 -1a3 3 0 0 1 3 -3z"></path>
+              </svg>
+              Download for iOS
+            </a>
+          </div>
 
-        <div className="relative">
-          {featureCards.map((card, i) => {
-             const start = i / featureCards.length;
-             const end = 1;
-             return (
-               <FeatureCard 
-                 key={i} 
-                 card={card} 
-                 index={i} 
-                 progress={scrollYProgress} 
-                 range={[start, end]}
-               />
-             );
-          })}
+          {/* Comparison Table Header */}
+          <div className="grid grid-cols-6 gap-4 py-4 md:py-12 border-b border-white/10 mb-4">
+            <div className="col-span-3"></div>
+            
+            {/* App 1: Olive */}
+            <div className="flex items-center col-span-1 justify-center">
+              <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10 md:w-[52px] md:h-[52px]">
+                <g clipPath="url(#clip0_1824_55)">
+                  <rect width="52" height="52" rx="26" fill="#253612"></rect>
+                  <path d="M22.1953 12.4453C23.8677 14.3436 24.9468 15.7801 25.4418 18.6644" stroke="#B47E54" strokeWidth="2.73746" strokeLinecap="round"></path>
+                  <path d="M36.0838 65.4775C9.79666 71.5984 0.367742 24.6086 25.2201 18.8218C50.0726 13.035 62.3709 59.3567 36.0838 65.4775Z" fill="#AEB93E"></path>
+                  <path d="M49.5669 36.6962C52.6946 50.1289 50.5283 62.1133 36.078 65.478C29.9772 66.8986 25.1621 65.9733 21.399 63.4193C25.5664 64.2071 31.1859 64.5379 36.8407 62.6748C42.4955 60.8116 50.7364 56.5882 49.5669 36.6962Z" fill="black" fillOpacity="0.17"></path>
+                  <path d="M36.1768 -0.776715C35.0394 -2.02475 29.1307 -0.94848 26.2378 1.53753C23.3452 4.02349 22.7647 8.45598 23.8434 12.0203C25.8939 12.1434 28.4453 12.1496 32.0979 9.50851C35.7503 6.86743 37.1925 1.18029 36.1768 -0.776715Z" fill="#AEB93E"></path>
+                  <path d="M33.8919 1.24249C33.9897 0.456609 29.1134 7.70203 24.1195 10.8909C24.1195 10.8909 28.0415 9.22158 29.9985 7.00571C31.9553 4.79011 33.7188 2.63147 33.8919 1.24249Z" fill="#8F9838"></path>
+                  <g filter="url(#filter0_f_1824_55)">
+                    <path d="M41.4185 42.5343C42.951 42.1775 43.9041 40.6459 43.5472 39.1134C43.1904 37.581 41.6588 36.6279 40.1264 36.9848C38.5939 37.3416 37.6408 38.8732 37.9977 40.4056C38.3545 41.9381 39.8861 42.8912 41.4185 42.5343Z" fill="#FCC1C1"></path>
+                  </g>
+                  <g filter="url(#filter1_f_1824_55)">
+                    <path d="M21.0748 46.9523C22.6073 46.5955 23.5603 45.0639 23.2035 43.5314C22.8467 41.9989 21.3151 41.0459 19.7826 41.4027C18.2501 41.7596 17.2971 43.2911 17.6539 44.8236C18.0107 46.3561 19.5423 47.3091 21.0748 46.9523Z" fill="#FCC1C1"></path>
+                  </g>
+                  <path d="M21.32 34.5697C25.2881 33.6457 26.8614 40.4022 22.8932 41.3261C18.9249 42.2501 17.3517 35.4937 21.32 34.5697Z" fill="#2D2D2D"></path>
+                  <path d="M35.6792 31.2279C39.6476 30.3039 41.2208 37.0604 37.2524 37.9844C33.2843 38.9083 31.7111 32.1519 35.6792 31.2279Z" fill="#2D2D2D"></path>
+                  <path d="M27.8485 39.9734C28.6125 40.6384 29.3719 40.8326 30.3614 40.6161C31.4276 40.3827 32.0923 39.799 32.4614 38.7719" stroke="#2D2D2D" strokeWidth="1.14061" strokeLinecap="round"></path>
+                  <path d="M23.4435 36.7732C23.908 36.6651 24.1968 36.2009 24.0887 35.7364C23.9805 35.272 23.5163 34.9832 23.0519 35.0913C22.5874 35.1994 22.2986 35.6636 22.4068 36.1281C22.5149 36.5925 22.9791 36.8813 23.4435 36.7732Z" fill="#D9D9D9"></path>
+                  <path d="M37.8185 33.4265C38.283 33.3184 38.5718 32.8542 38.4637 32.3898C38.3555 31.9253 37.8913 31.6365 37.4269 31.7446C36.9624 31.8528 36.6736 32.3169 36.7818 32.7814C36.8899 33.2458 37.3541 33.5347 37.8185 33.4265Z" fill="#D9D9D9"></path>
+                </g>
+                <defs>
+                  <filter id="filter0_f_1824_55" x="34.2947" y="33.283" width="12.9574" height="12.9535" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                    <feGaussianBlur stdDeviation="1.81357" result="effect1_foregroundBlur_1824_55"></feGaussianBlur>
+                  </filter>
+                  <filter id="filter1_f_1824_55" x="13.951" y="37.701" width="12.9574" height="12.9535" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+                    <feGaussianBlur stdDeviation="1.81357" result="effect1_foregroundBlur_1824_55"></feGaussianBlur>
+                  </filter>
+                  <clipPath id="clip0_1824_55">
+                    <rect width="52" height="52" rx="26" fill="white"></rect>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+
+            {/* App 2: Carrot */}
+            <div className="flex items-center col-span-1 justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 53 55" className="w-8 h-8 md:w-12 md:h-12">
+                <path fill="#FF8C38" d="M44.434 27.64 28.888 12.914a5.019 5.019 0 0 0-7.676.998l-1.907 3.2 9.8 9.283a1.128 1.128 0 0 1 0 1.659 1.288 1.288 0 0 1-1.753 0l-9.309-8.819L6.934 37.918l5.25 4.973a1.128 1.128 0 0 1 0 1.659 1.288 1.288 0 0 1-1.751 0l-4.761-4.51-4.518 7.593c-2.416 4.061 2.33 8.565 6.617 6.276l19.298-10.297-7.244-6.861a1.128 1.128 0 0 1 0-1.659 1.288 1.288 0 0 1 1.752 0l7.732 7.325 14.064-7.506a4.474 4.474 0 0 0 1.051-7.27"></path>
+                <path fill="#25D265" d="m39.862 18.582-2.153-2.145 5.756-14.923a1.663 1.663 0 1 1 3.102 1.197l-4.401 11.41 8.032-3.127a1.663 1.663 0 1 1 1.206 3.098l-11.542 4.49Z"></path>
+              </svg>
+            </div>
+
+            {/* App 3: Blue B */}
+            <div className="flex items-center col-span-1 justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 53 55" className="w-8 h-8 md:w-12 md:h-12">
+                <path fill="#F5FAF6" fillRule="evenodd" d="M28.544.786c-.684.115-1.302.48-1.553.915-.168.29-.602 1.678-1.332 4.254l-.584 2.06c-.095.33-.227.691-.296.802-.099.162-1.707 2.327-2.191 2.952l-.709.923c-2.364 3.085-4.055 5.133-5.123 6.204-.9.903-1.569 1.368-2.407 1.67-.196.07-.437.176-.536.234-.379.222-.76.757-.88 1.236-.032.124-.054 2.847-.071 8.533l-.024 8.351.09.3c.182.596.63 1.082 1.199 1.302.19.073.384.101.868.126l.622.03 3.626 1.147 6.071 1.918 2.917.922c.622.195 1.003.224 3.37.258 1.967.027 3.207-.012 4.34-.138 2.54-.282 3.866-.807 4.272-1.692.376-.822.407-1.679.095-2.69-.155-.506-.19-.823-.127-1.17a1.995 1.995 0 0 1 1.01-1.417c.401-.227.921-.772 1.105-1.16.231-.488.306-.896.277-1.52-.026-.55-.098-.854-.326-1.359-.284-.63-.289-1.206-.015-1.798.083-.18.245-.37.677-.794.566-.554.846-.913 1.008-1.292a3.907 3.907 0 0 0 .123-2.824c-.142-.424-.28-.687-.625-1.194-.39-.573-.498-1.17-.317-1.754.11-.358.288-.631.666-1.024.612-.636 1.003-1.27 1.157-1.873.085-.336.086-1.064.001-1.424-.297-1.26-1.49-2.452-2.98-2.976-.638-.224-.507-.218-5.45-.246-4.278-.023-4.627-.03-4.804-.101a2.05 2.05 0 0 1-1.227-1.337c-.055-.191-.068-.357-.052-.665.02-.39.033-.44.28-.99.399-.886.855-1.893 1.361-3.003.277-.606.483-1.12.518-1.287.097-.474.162-1.958.133-3.031-.033-1.19-.137-2.565-.22-2.89-.266-1.062-.913-1.823-1.896-2.232-.62-.258-1.428-.36-2.041-.256ZM24.2 2.269a26.027 26.027 0 0 0-13.344 5.143 26.786 26.786 0 0 0-5.149 5.149C2.782 16.466 1.082 20.85.574 25.8c-.073.717-.1 3.329-.043 4.128.178 2.458.604 4.552 1.39 6.835 1.093 3.172 3.023 6.42 5.263 8.86.227.248.48.525.561.617.174.195 1.315 1.272 1.716 1.619 4.123 3.572 9.08 5.694 14.63 6.263.72.074 3.28.1 4.148.043 7.047-.463 13.6-3.797 18.199-9.261 1.373-1.63 2.436-3.269 3.42-5.267 4.29-8.713 3.301-19.288-2.567-27.075a27.68 27.68 0 0 0-4.599-4.724c-2.03-1.62-4.221-2.886-6.715-3.88-.651-.26-1.797-.643-1.817-.608-.01.016-.002.155.016.308.105.866.17 2.969.131 4.268l-.017.6.554.24c.767.334.966.43 1.57.755a21.394 21.394 0 0 1 6.857 5.804c.302.39.457.55.64.663 1.162.718 2.12 1.92 2.507 3.145.201.637.225.998.148 2.268-.003.047.067.318.155.6.985 3.16 1.192 6.759.579 10.04a21.077 21.077 0 0 1-4.573 9.699c-.237.283-.474.56-.527.614-.06.062-.134.249-.197.498-.194.765-.462 1.307-.859 1.735-.657.71-1.724 1.22-3.196 1.53-.239.05-.449.146-.956.437-2.35 1.346-5.06 2.268-7.666 2.606-1.126.146-1.53.17-2.81.171-1.476.001-2.226-.058-3.552-.28-5.113-.857-9.734-3.593-13.027-7.715-.216-.27-.392-.504-.392-.522 0-.017.227-.038.504-.047.399-.014.547-.037.707-.11.3-.136.603-.44.747-.752l.123-.268v-8.667c0-8.25-.003-8.678-.077-8.89a1.546 1.546 0 0 0-.535-.715c-.337-.233-.412-.24-2.48-.244-1.047 0-1.913-.017-1.925-.037-.024-.039.305-.892.594-1.54a21.183 21.183 0 0 1 4.205-6.14c2.394-2.44 5.24-4.222 8.435-5.281 1.122-.372 2.592-.725 3.509-.843.125-.015.236-.044.247-.062.012-.019.241-.803.51-1.743.27-.94.588-2.033.708-2.43.12-.396.218-.748.218-.783 0-.072.026-.072-.834.006Zm3.86 16.584c-1.273.068-1.83.128-2.165.234a2.818 2.818 0 0 0-1.652 1.393c-.122.233-.288.811-.839 2.924a4252.912 4252.912 0 0 1-1.398 5.357 8434.1 8434.1 0 0 1-1.44 5.514c-.865 3.305-.988 3.816-.988 4.098 0 .89.598 1.587 1.514 1.763.398.076 5.157.08 6.023.004 1.977-.172 3.604-.486 4.87-.94 4.025-1.441 5.917-4.594 4.505-7.506-.547-1.129-1.551-1.935-2.963-2.38-.6-.188-.638-.244-.224-.336.714-.16 1.876-.642 2.581-1.073.672-.41 1.363-1.01 1.806-1.568.877-1.104 1.178-2.447.843-3.764-.494-1.946-2.507-3.234-5.646-3.614-1.243-.15-3.19-.193-4.828-.106Zm1.716 2.87c-.142.016-.316.06-.387.098-.158.083-.376.31-.462.482-.051.102-1.318 5.048-1.318 5.146 0 .04 1.056.027 1.609-.021.86-.075 1.685-.291 2.317-.608.907-.454 1.585-1.275 1.764-2.135.09-.437.064-1.136-.057-1.465-.251-.689-.823-1.178-1.621-1.388-.49-.129-1.278-.175-1.845-.11Zm-2.432 8.686a1.127 1.127 0 0 0-.593.411c-.058.082-.333 1.01-.76 2.564-.733 2.671-.76 2.821-.58 3.169.116.226.334.416.586.512.17.065.287.073.809.05 1.596-.067 2.917-.577 3.785-1.463.503-.514.765-1 .907-1.684.084-.407.059-1.154-.051-1.517-.37-1.216-1.4-1.904-3.087-2.059-.591-.054-.764-.051-1.016.017Z" clipRule="evenodd"></path>
+              </svg>
+            </div>
+          </div>
+
+          {/* Table Rows */}
+          <div className="space-y-4">
+            <FeatureRow 
+              label="Detailed Product Breakdown"
+              app1={true}
+              app2={true}
+              app3={true}
+            />
+            <FeatureRow 
+              label="Comprehensive Water Data"
+              app1={true}
+              app2={false}
+              app3={false}
+            />
+            <FeatureRow 
+              label="Seed Oil Free Dining Map"
+              app1={true}
+              app2={false}
+              app3={false}
+            />
+            <FeatureRow 
+              label="Seed Oil Flagging"
+              app1={true}
+              app2={false}
+              app3={true}
+            />
+            <FeatureRow 
+              label="Certified Lab-Testing Data"
+              app1={true}
+              app2={false}
+              app3={false}
+            />
+          </div>
         </div>
       </div>
     </section>
   );
 };
+
+const FeatureRow: React.FC<{ label: string; app1: boolean; app2: boolean; app3: boolean }> = ({ 
+  label, app1, app2, app3 
+}) => {
+  return (
+    <div className="grid grid-cols-6 gap-4 items-center py-6 md:py-8 border-b border-white/10 last:border-none">
+      <div className="col-span-3 text-base md:text-lg font-medium pr-4">{label}</div>
+      
+      {/* Column 1 */}
+      <div className="col-span-1 flex justify-center">
+        {app1 ? <CheckIcon /> : <CrossIcon />}
+      </div>
+      
+      {/* Column 2 */}
+      <div className="col-span-1 flex justify-center">
+        {app2 ? <CheckIcon /> : <CrossIcon />}
+      </div>
+      
+      {/* Column 3 */}
+      <div className="col-span-1 flex justify-center">
+        {app3 ? <CheckIcon /> : <CrossIcon />}
+      </div>
+    </div>
+  );
+};
+
+const CheckIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" stroke="none" className="tabler-icon tabler-icon-circle-check-filled w-8 h-8 md:w-11 md:h-11 text-[#AEB93E]">
+    <path d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"></path>
+  </svg>
+);
+
+const CrossIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none" className="w-8 h-8 md:w-11 md:h-11">
+    <path fill="#DE1919" d="M16.621 11.237a3.949 3.949 0 0 0-4.81 6.189l5.103 5.106-5.103 5.106-.327.371a3.948 3.948 0 0 0 5.911 5.213l5.107-5.102 5.106 5.102.371.328a3.95 3.95 0 0 0 5.213-5.912l-5.102-5.106 5.102-5.106.328-.372a3.948 3.948 0 0 0-5.912-5.212l-5.106 5.102-5.107-5.102-.37-.328-.404-.277Z"></path>
+  </svg>
+);
 
 export default Features;
