@@ -7,7 +7,16 @@ interface ScanningCardProps {
   index: number;
 }
 
-const Particle = ({ delay, left, top, scale, rotate, opacity }: any) => (
+interface ParticleProps {
+  delay: number;
+  left: string;
+  top: string;
+  scale: number;
+  rotate: number;
+  opacity: number;
+}
+
+const Particle = ({ delay, left, top, scale, rotate, opacity }: ParticleProps) => (
   <motion.svg
     className="pointer-events-none absolute z-20"
     width="32"

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 
 interface AnalysisCardProps {
@@ -17,6 +17,46 @@ const products = [
 
 // Triple the products for seamless infinite scroll
 const infiniteProducts = [...products, ...products, ...products];
+
+const ProductItem = ({ src, index, x }: { src: string; index: number; x: any }) => {
+  const itemWidth = 88;
+  const itemCenter = index * itemWidth + 36; // index * (width+gap) + width/2
+  
+  const scale = useTransform(x, (currentX: number) => {
+    const positionInCard = currentX + itemCenter;
+    const distance = Math.abs(positionInCard);
+    if (distance > 100) return 0.8;
+    return 1.4 - (distance / 100) * 0.6;
+  });
+
+  const opacity = useTransform(x, (currentX: number) => {
+    const positionInCard = currentX + itemCenter;
+    const distance = Math.abs(positionInCard);
+    if (distance > 150) return 0.1;
+    if (distance > 100) return 0.3;
+    return 1 - (distance / 100) * 0.7;
+  });
+
+  const blur = useTransform(x, (currentX: number) => {
+    const positionInCard = currentX + itemCenter;
+    const distance = Math.abs(positionInCard);
+    if (distance > 50) return "blur(2px)";
+    return `blur(${Math.max(0, (distance / 50) * 2)}px)`;
+  });
+
+  return (
+    <motion.div
+      style={{ scale, opacity, filter: blur }}
+      className="flex-shrink-0 w-[72px] h-[72px] rounded-2xl shadow-xl border-2 border-white overflow-hidden bg-white"
+    >
+      <img
+        src={src}
+        className="w-full h-full object-contain p-2"
+        alt={`Product ${index}`}
+      />
+    </motion.div>
+  );
+};
 
 const AnalysisCard: React.FC<AnalysisCardProps> = ({ title, description, index }) => {
   const x = useMotionValue(0);
@@ -81,46 +121,6 @@ const AnalysisCard: React.FC<AnalysisCardProps> = ({ title, description, index }
       <p className="text-sm font-[500] text-neutral-600 max-w-[80%] mt-6 leading-relaxed">
         {description}
       </p>
-    </motion.div>
-  );
-};
-
-const ProductItem = ({ src, index, x }: { src: string; index: number; x: any }) => {
-  const itemWidth = 88;
-  const itemCenter = index * itemWidth + 36; // index * (width+gap) + width/2
-  
-  const scale = useTransform(x, (currentX: number) => {
-    const positionInCard = currentX + itemCenter;
-    const distance = Math.abs(positionInCard);
-    if (distance > 100) return 0.8;
-    return 1.4 - (distance / 100) * 0.6;
-  });
-
-  const opacity = useTransform(x, (currentX: number) => {
-    const positionInCard = currentX + itemCenter;
-    const distance = Math.abs(positionInCard);
-    if (distance > 150) return 0.1;
-    if (distance > 100) return 0.3;
-    return 1 - (distance / 100) * 0.7;
-  });
-
-  const blur = useTransform(x, (currentX: number) => {
-    const positionInCard = currentX + itemCenter;
-    const distance = Math.abs(positionInCard);
-    if (distance > 50) return "blur(2px)";
-    return `blur(${Math.max(0, (distance / 50) * 2)}px)`;
-  });
-
-  return (
-    <motion.div
-      style={{ scale, opacity, filter: blur }}
-      className="flex-shrink-0 w-[72px] h-[72px] rounded-2xl shadow-xl border-2 border-white overflow-hidden bg-white"
-    >
-      <img
-        src={src}
-        className="w-full h-full object-contain p-2"
-        alt={`Product ${index}`}
-      />
     </motion.div>
   );
 };
